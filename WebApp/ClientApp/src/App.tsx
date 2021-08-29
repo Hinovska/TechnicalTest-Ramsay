@@ -5,6 +5,7 @@ import Home  from './components/Home';
 import { StudentData } from './components/StudentData';
 
 import './assets/css/custom.css'
+import './assets/css/modal.css'
 
 export default class App extends Component {
   static displayName = App.name;

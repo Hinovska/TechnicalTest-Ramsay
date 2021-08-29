@@ -1,7 +1,8 @@
 
 import React, { Component, InputHTMLAttributes } from 'react';
-import { Student, Response } from '../types';
+import { Student, Response, ModalType } from '../types';
 import { ApiConnectionAgent } from '../services/ApiConnectionAgent';
+import ModalComponent from './Modal';
 
 export type StudentDataProps = {
     displayName: string;
@@ -261,12 +262,7 @@ export class StudentData extends Component<StudentDataProps, StudentDataState> {
                             </table>              
                         </>
                     }
-                    {this.state.showAlert ?
-                        <div className="alert alert-secondary" role="alert">
-                            {this.state.message}
-                        </div>
-                        : null
-                    }
+                    {this.state.showAlert ? <ModalComponent type={ModalType.Alert} tittle="Action result" message={this.state.message} buttonOK={{ label: 'Done' }} /> : null }
                 </div>
             </>
         );

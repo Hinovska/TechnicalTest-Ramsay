@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

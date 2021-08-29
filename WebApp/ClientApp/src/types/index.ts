@@ -26,3 +26,21 @@ export class TryAgain {
         this.Seconds = 5;
     }
 }
+export enum ModalType {
+    Alert = 1,
+    Confirm = 2
+}
+
+export type ModalButton = {
+    label: string;
+    onClick?: () => void;
+    className?: string;
+}
+
+export type Modal = {
+    tittle: string;
+    message: string;
+    type: ModalType;
+    buttonOK: ModalButton;
+    buttomCancel?: ModalButton;
+}
