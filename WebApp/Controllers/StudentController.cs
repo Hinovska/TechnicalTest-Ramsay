@@ -40,6 +40,7 @@ namespace Ramsay.WebApp.Controllers
             try
             {
                 objResponse.Data = brStudent.Search(new sfEntities.Find.Student());
+                objResponse.Message = ((objResponse.Data != null) ? objResponse.Data.Count : 0) + " students found";
                 objResponse.StatusCode = HttpStatusCode.OK.ToString();
                 return Ok(objResponse);
             }
@@ -47,6 +48,7 @@ namespace Ramsay.WebApp.Controllers
             {
                 objResponse.StatusCode = HttpStatusCode.InternalServerError.ToString();
                 objResponse.Message = ex.Message;
+                objResponse.StatusCode = HttpStatusCode.NotFound.ToString();
                 return NotFound(objResponse);
             }
         }
@@ -57,10 +59,11 @@ namespace Ramsay.WebApp.Controllers
         {
             if (id > 0)
             {
-                APIEntities.OperationAPI<sfEntities.Student.Student> objResponse = new APIEntities.OperationAPI<sfEntities.Student.Student>();
+                APIEntities.OperationAPI<List<sfEntities.Student.Student>> objResponse = new APIEntities.OperationAPI<List<sfEntities.Student.Student>>();
                 try
                 {
-                    objResponse.Data = brStudent.Load(id);
+                    sfEntities.Student.Student result = brStudent.Load(id);
+                    objResponse.Data = (result != null) ? new List<sfEntities.Student.Student>() { result } : null;
                     objResponse.Message = (objResponse.Data == null) ? "Student not found" : "Student found";
                     objResponse.StatusCode = HttpStatusCode.OK.ToString();
                     return Ok(objResponse);
@@ -81,12 +84,13 @@ namespace Ramsay.WebApp.Controllers
         {
             if (brStudent.IsValid(objNewStudent))
             {
-                APIEntities.OperationAPI<sfEntities.Student.Student> objResponse = new APIEntities.OperationAPI<sfEntities.Student.Student>();
+                APIEntities.OperationAPI<List<sfEntities.Student.Student>> objResponse = new APIEntities.OperationAPI<List<sfEntities.Student.Student>>();
                 try
                 {
                     if (!brStudent.Exists(objNewStudent.Username))
                     {
-                        objResponse.Data = brStudent.Registrer(objNewStudent);
+                        sfEntities.Student.Student result = brStudent.Registrer(objNewStudent);
+                        objResponse.Data = (result != null) ? new List<sfEntities.Student.Student>() { result } : null;
                         objResponse.Message = "The student " + objNewStudent.Username + " has been added !!";
                         objResponse.StatusCode = HttpStatusCode.OK.ToString();
                         return Ok(objResponse);
@@ -138,13 +142,14 @@ namespace Ramsay.WebApp.Controllers
         {
             if (Id > 0 && brStudent.IsValid(objStudent) )
             {
-                APIEntities.OperationAPI<sfEntities.Student.Student> objResponse = new APIEntities.OperationAPI<sfEntities.Student.Student>();
+                APIEntities.OperationAPI<List<sfEntities.Student.Student>> objResponse = new APIEntities.OperationAPI<List<sfEntities.Student.Student>>();
                 objStudent.Id = Id;      
                 try
                 {
-                    objResponse.Data = brStudent.Modify(objStudent);
-                    if (objResponse.Data != null)
+                    sfEntities.Student.Student result = brStudent.Modify(objStudent);
+                    if (result != null)
                     {
+                        objResponse.Data = new List<sfEntities.Student.Student>() { result };
                         objResponse.Message = "The student " + objStudent.Username + " has been modified !!";
                         objResponse.StatusCode = HttpStatusCode.OK.ToString();
                         return Ok(objResponse);

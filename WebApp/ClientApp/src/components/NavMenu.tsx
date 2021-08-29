@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React,{ Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import '../assets/css/NavMenu.css';
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+export type NavMenuProps = {
+    displayName: string;
+};
 
+type NavMenuState = {
+    collapsed: boolean;
+};
+
+export default class NavMenu extends Component<NavMenuProps, NavMenuState> {
   constructor (props) {
     super(props);
 
@@ -16,9 +22,7 @@ export class NavMenu extends Component {
   }
 
   toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+    this.setState({ collapsed: !this.state.collapsed });
   }
 
   render () {
