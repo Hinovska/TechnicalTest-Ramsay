@@ -1,5 +1,5 @@
 
-import React, { Component, InputHTMLAttributes } from 'react';
+import React, { Component } from 'react';
 import { Student, Response, ModalType } from '../types';
 import { ApiConnectionAgent } from '../services/ApiConnectionAgent';
 import ModalComponent from './Modal';

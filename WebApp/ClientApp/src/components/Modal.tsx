@@ -1,8 +1,8 @@
-﻿import React from "react";
+﻿import React, { Component } from "react";
 import { confirmAlert, ReactConfirmAlertProps } from 'react-confirm-alert';
 import { Modal } from '../types';
 
-export default class ModalComponent extends React.Component<Modal, any> {
+export default class ModalComponent extends Component<Modal, any> {
     constructor(props: Modal) {
         super(props);
     };
