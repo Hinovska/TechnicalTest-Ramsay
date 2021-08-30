@@ -41,13 +41,18 @@ namespace Ramsay.WebApp.Controllers
         [HttpPost]
         public IActionResult Authenticate([FromBody] APIAuthUser userCredentials)
         {
+            APIEntities.OperationAPI<string> objResponse = new APIEntities.OperationAPI<string>();
             if (userCredentials == null || userCredentials == new APIAuthUser())
                 return BadRequest();
 
-            var token = _jwtAuthenticationManager.Authenticate(userCredentials.UserName, userCredentials.Password);
+            string token = _jwtAuthenticationManager.Authenticate(userCredentials.UserName, userCredentials.Password);
             if (token == null)
                 return Unauthorized();
-            return Ok(token);
+
+            objResponse.Data = token;
+            objResponse.Message = "Token generated";
+            objResponse.StatusCode = HttpStatusCode.OK.ToString();
+            return Ok(objResponse);
         }
     }
 }

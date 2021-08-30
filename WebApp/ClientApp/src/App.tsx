@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
+import Layout from './components/Layout';
+import Home  from './components/Home';
 import { StudentData } from './components/StudentData';
 
 import './assets/css/custom.css'
+import './assets/css/modal.css'
 
 export default class App extends Component {
   static displayName = App.name;
