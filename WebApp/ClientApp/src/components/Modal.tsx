@@ -31,13 +31,13 @@ export default class ModalComponent extends React.Component<Modal, any> {
           message: this.props.message,
           buttons: modalButtoms,
           closeOnEscape: false,
-          closeOnClickOutside: true,
+          closeOnClickOutside: false,
           overlayClassName: 'unselectable'
         };
         confirmAlert(modalProps);
     };
 
     render() {
-        return (<div></div>);
+        return (<></>);
     };
 }

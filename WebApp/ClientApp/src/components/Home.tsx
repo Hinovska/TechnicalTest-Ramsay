@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export type HomeProps = {
-    displayName: string;
+    tittle: string;
 };
 
 type HomeState = {
@@ -9,9 +9,17 @@ type HomeState = {
 };
 
 export default class Home extends Component<HomeProps, HomeState> {
-
+    static displayName = Home.name;
     constructor(props: HomeProps) {
         super(props);        
+    };
+
+    componentDidMount() {
+
+    };
+
+    componentWillUnmount() {
+
     };
 
     render ()  {
@@ -61,5 +69,5 @@ export default class Home extends Component<HomeProps, HomeState> {
                 </div>
             </div>
         );
-    }
+    };
 }

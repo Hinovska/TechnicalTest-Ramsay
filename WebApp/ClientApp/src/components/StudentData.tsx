@@ -96,7 +96,6 @@ export class StudentData extends Component<StudentDataProps, StudentDataState> {
                 operationMessage = 'Service unavailable';
             }
             this.showAlert(operationMessage);
-            setTimeout(() => { this.hideAlert(); }, 5000);
         }
         else {
             this.setState({ onError: true });
@@ -118,8 +117,7 @@ export class StudentData extends Component<StudentDataProps, StudentDataState> {
         else {
             operationMessage = 'Service unavailable';
         }
-        this.showAlert(operationMessage);
-        setTimeout(() => { this.hideAlert(); }, 5000);        
+        this.showAlert(operationMessage);       
     };
 
     showAlert = async (message: string) => {
@@ -262,7 +260,12 @@ export class StudentData extends Component<StudentDataProps, StudentDataState> {
                             </table>              
                         </>
                     }
-                    {this.state.showAlert ? <ModalComponent type={ModalType.Alert} tittle="Action result" message={this.state.message} buttonOK={{ label: 'Done' }} /> : null }
+                    {this.state.showAlert ?
+                        <ModalComponent type={ModalType.Alert} tittle="Action result" message={this.state.message}
+                        buttonOK={{
+                            label: 'Done',
+                            onClick: () => { this.hideAlert(); }
+                        }} /> : null}
                 </div>
             </>
         );
